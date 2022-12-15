@@ -52,14 +52,14 @@ class Graph:
         """
 
         if len(mapping) != len(target_vertices):
-            print("Błąd przypasowania lewej strony produkcji do grafu")
+            print("Produkcja nie została wykonania przez błąd przypasowania lewej strony produkcji do grafu")
             return
 
         # czy produkcja może zostać wykonana?
         for v in p.to_delete:
             for a in self.active:
                 if a not in target_vertices and (self.M[mapping[v]][a] or self.M[a][mapping[v]]):
-                    print("Błąd przy wykonywaniu produkcji - pozostawione zwisające krawędzie")
+                    print("Produkcja nie została wykonana, nie spełniony jest warunek sklejania - pozostawione zwisające krawędzie")
                     return
 
         self.remove(p.to_delete, p.obsolete_edges, mapping)
