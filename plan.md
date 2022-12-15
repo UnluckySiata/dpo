@@ -37,7 +37,7 @@ mają należeć do izomorfizmu lewej strony produkcji (również wybierany).
 Uwaga: Wyświetlane indeksy wierzchołków nie koniecznie muszą być takie same jak w naszej reprezentacji grafu.
 Zawsze można je zmapować np (1,2,3) -> (3, 5, 9) żeby nie było "losowych" indeksów przy wierzchołkach w grafice.
 
-Najpierw trzeba sprawdzić czy na wierzchołkach wybranych przez użytkownika na się zdefiniować izomorfizm do L
+Najpierw trzeba sprawdzić czy na wierzchołkach wybranych przez użytkownika na się zdefiniować izomorfizm do L.
 Są 2 typy błędów:
 - Przy dopasowaniu wierzchołków (zła liczba wierzchołków, etykiety)
 - Przy faktycznym wykonywaniu produkcji (np pozostawienie zwisających krawędzi)
