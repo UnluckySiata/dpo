@@ -52,14 +52,15 @@ class Graph:
         """
 
         if len(mapping) != len(target_vertices):
-            raise Exception("Błąd przypasowania lewej strony produkcji do grafu")
+            print("Błąd przypasowania lewej strony produkcji do grafu")
+            return
 
         # czy produkcja może zostać wykonana?
         for v in p.to_delete:
             for a in self.active:
                 if a not in target_vertices and (self.M[mapping[v]][a] or self.M[a][mapping[v]]):
-                    print(v, a)
-                    raise Exception("Błąd przy wykonywaniu produkcji - pozostawione zwisające krawędzie")
+                    print("Błąd przy wykonywaniu produkcji - pozostawione zwisające krawędzie")
+                    return
 
         self.remove(p.to_delete, p.obsolete_edges, mapping)
 
@@ -80,7 +81,7 @@ class Graph:
         edges = [(v, w) for v in range(self.n) for w in range(self.n) if self.M[v][w]]
 
         for a in self.active:
-            nodes.append((a, {"label": labels[a]}))
+            nodes.append((a, {"label": self.labels[a]}))
 
 
         NX.add_nodes_from(nodes)
@@ -90,6 +91,8 @@ class Graph:
 
 
 # zdefiniowane grafy
+g0 = Graph([[False]], {0: "A"})
+
 M = [
         [False, True, True, True, False],
         [False, False, False, False, True],
@@ -108,4 +111,4 @@ labels = {
 
 g1 = Graph(M, labels)
 
-graphs = [g1]
+graphs = [g0, g1]

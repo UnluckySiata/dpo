@@ -6,7 +6,9 @@ color_map = {
     "B": "yellow",
     "C": "orange",
     "D": "green",
-    "E": "blue"
+    "E": "blue",
+    "F": "purple",
+    "G": "grey"
 }
 
 def draw(NX):
