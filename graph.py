@@ -38,7 +38,22 @@ class Graph:
 
         # czy podgraf na tych wierzchołkach jest izomorficzny do L?
         #mapping = dict()
-        mapping = {k: v for k in p.L[0] for v in target_vertices if self.labels[v] == p.labels[k]}
+        if len(target_vertices) != len(p.L[0]):
+            print("Produkcja nie została wykonania przez błąd przypasowania lewej strony produkcji do grafu")
+            return
+
+        proceed = True
+
+        for i in range(len(target_vertices)):
+            if self.labels[target_vertices[i]] != p.labels[p.L[0][i]]:
+                proceed = False
+                break
+
+        if not proceed:
+            print("Produkcja nie została wykonania przez błąd przypasowania lewej strony produkcji do grafu")
+            return
+
+        mapping = {p.L[0][i]: target_vertices[i] for i in range(len(target_vertices))}
         """
         for v in target_vertices:
             for i, w in enumerate(p.L[0]):
@@ -51,9 +66,6 @@ class Graph:
                     mapping[w] = v
         """
 
-        if len(mapping) != len(target_vertices):
-            print("Produkcja nie została wykonania przez błąd przypasowania lewej strony produkcji do grafu")
-            return
 
         # czy produkcja może zostać wykonana?
         for v in p.to_delete:
