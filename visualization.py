@@ -24,3 +24,9 @@ def draw(NX):
     nx.draw(NX, pos , node_color = colors, alpha=0.5)
     nx.draw_networkx_labels(NX, pos, labels=labels)
     plt.show()
+
+def show_graphs():
+    pass
+
+def show_productions():
+    pass
