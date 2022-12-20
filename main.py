@@ -1,6 +1,7 @@
 import pickle
+from copy import deepcopy
 from production import Production, productions
-from graph import graphs, Graph
+import graph
 from visualization import draw, show_graphs, show_productions
 
 def choose_graph(graphs):
@@ -20,7 +21,7 @@ def choose_production(productions):
     except Exception: return (False, -1)
 
 
-def choose_vertices(G: Graph):
+def choose_vertices(G: graph.Graph):
     vertices = []
     cond = True
     try:
@@ -71,7 +72,7 @@ def print_sequence(seq):
 
     print(result)
 
-def produce_from_sequence(graphs: list[Graph], productions: list[Production], filename):
+def produce_from_sequence(graphs: list[graph.Graph], productions: list[Production], filename):
     seq = []
     try:
         with open(f"sequences/{filename}", "rb") as f:
@@ -106,6 +107,7 @@ q - zakończ działanie programu
 
 
 if __name__ == "__main__":
+    graphs = deepcopy(graph.graphs)
     graph_index = -1
     production_index = -1
     vertices = []
@@ -135,6 +137,7 @@ if __name__ == "__main__":
                         vertices_chosen, vertices = choose_vertices(graphs[graph_index])
 
                 case "gw":
+                    graphs = deepcopy(graph.graphs)
                     graph_index = -1
                     graph_chosen = False
                     while not graph_chosen:
@@ -164,6 +167,7 @@ if __name__ == "__main__":
                 case "so": print_sequence(sequence)
                 case "ss": save_sequence(sequence)
                 case "sw":
+                    graphs = deepcopy(graph.graphs)
                     filename = input("Podaj nazwę pliku, z którego chcesz wczytać sekwencję: ")
                     loaded_sequence = produce_from_sequence(graphs, productions, filename)
                     if loaded_sequence is not None:
