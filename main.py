@@ -52,6 +52,9 @@ Wybrane wierzchołki: {"brak" if len(vertices) == 0 else ", ".join(map(str, vert
 
 def save_sequence(seq):
     
+    if len(seq) <= 1:
+        print("Brak sekwencji do zapisania")
+        return
     filename = input("Podaj nazwę pliku, do którego chcesz zapisać sekwencję (bez rozszerzenia): ")
 
     try:
@@ -167,10 +170,10 @@ if __name__ == "__main__":
                 case "so": print_sequence(sequence)
                 case "ss": save_sequence(sequence)
                 case "sw":
-                    graphs = deepcopy(graph.graphs)
                     filename = input("Podaj nazwę pliku, z którego chcesz wczytać sekwencję: ")
                     loaded_sequence = produce_from_sequence(graphs, productions, filename)
                     if loaded_sequence is not None:
+                        graphs = deepcopy(graph.graphs)
                         sequence = loaded_sequence
                         graph_index = loaded_sequence[0]
                         graph_chosen = True
