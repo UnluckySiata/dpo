@@ -1,3 +1,4 @@
+import webbrowser
 import networkx as nx
 import matplotlib.pyplot as plt
 
@@ -8,7 +9,10 @@ color_map = {
     "D": "green",
     "E": "blue",
     "F": "purple",
-    "G": "grey"
+    "G": "grey",
+    "H": "cyan",
+    "I": "brown",
+    "J": "olive"
 }
 
 def draw(NX):
@@ -16,17 +20,14 @@ def draw(NX):
     attributes = nx.get_node_attributes(NX, "label")
     colors = []
     for node in NX.nodes():
-        #labels[node] = f"{node} {attributes[node]}"
-        labels[node] = node
+        labels[node] = f"{node} {attributes[node]}"
+        #labels[node] = node
         colors.append(color_map[attributes[node]])
 
     pos = nx.planar_layout(NX)
-    nx.draw(NX, pos , node_color = colors, alpha=0.5)
+    nx.draw(NX, pos, node_color = colors, alpha=0.5)
     nx.draw_networkx_labels(NX, pos, labels=labels)
     plt.show()
 
-def show_graphs():
-    pass
-
 def show_productions():
-    pass
+    webbrowser.open_new("productions.pdf")

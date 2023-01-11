@@ -2,7 +2,7 @@ import pickle
 from copy import deepcopy
 from production import Production, productions
 import graph
-from visualization import draw, show_graphs, show_productions
+from visualization import draw, show_productions
 
 def choose_graph(graphs):
     try:
@@ -128,7 +128,6 @@ if __name__ == "__main__":
             get_action = False
             match input("Wybierz jedną z akcji: "):
                 case "h": show_help()
-                case "g": show_graphs()
                 case "p": show_productions()
                 case "v":
                     vertices_chosen = False
@@ -173,10 +172,11 @@ if __name__ == "__main__":
                     filename = input("Podaj nazwę pliku, z którego chcesz wczytać sekwencję: ")
                     loaded_sequence = produce_from_sequence(graphs, productions, filename)
                     if loaded_sequence is not None:
-                        graphs = deepcopy(graph.graphs)
                         sequence = loaded_sequence
                         graph_index = loaded_sequence[0]
                         graph_chosen = True
+                    else: graphs = deepcopy(graph.graphs)
+
 
                 case "q": run = False
                 case _: get_action = True

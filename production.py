@@ -29,11 +29,48 @@ class Production:
 
 
 # zdefiniowane produkcje
+productions = []
 # dołożenie wierzchołka B i krawędzi A -> B
-p0 = Production(((1,), ()), ((1,), ()), ((1, 2), (2,), ()), {1: "A", 2: "B"})
-# dołożenie wierzchołków C i D oraz krawędzi B -> C i B -> D
-p1 = Production(((1,), (), (), ()), ((1,), (), (), ()), ((1, 2, 3), (2, 3), (), ()), {1: "B", 2: "C", 3: "D"})
+productions.append(Production(((1,), ()), ((1,), ()), ((1, 2), (2,), ()), {1: "A", 2: "B"}))
 
+# podmienienie wierzchołka B na C (po produkcji p0)
+L = ((1, 2), (2,), ())
+K = ((1,), ())
+R = ((1, 3), (3,), ())
+labels = {
+    1: "A",
+    2: "B",
+    3: "C"
+}
+productions.append(Production(L, K, R, labels))
+
+# dołożenie krawędzi B -> C
+L = ((1, 2, 3), (2, 3), (), ())
+K = ((1, 2, 3), (2, 3), (), ())
+R = ((1, 2, 3), (2, 3), (3,), ())
+labels = {
+    1: "A",
+    2: "B",
+    3: "C"
+}
+
+productions.append(Production(L, K, R, labels))
+
+
+L = ((1, 2, 3), (2, 3), (3,), ())
+K = ((1, 2), (2,), ())
+R = ((1, 2, 4), (2,), (4,), ())
+labels = {
+    1: "A",
+    2: "B",
+    3: "C",
+    4: "D"
+}
+productions.append(Production(L, K, R, labels))
+
+productions.append(Production(((1,), (), (), ()), ((1,), (), (), ()), ((1, 2, 3), (2, 3), (), ()), {1: "B", 2: "C", 3: "D"}))
+
+# "sklejenie" wierzchołków z poprzedniej produkcji w 1
 L = ((1, 2, 3), (2, 3), (), ())
 K = ((1,), ())
 R = ((1, 4), (4,), ())
@@ -43,9 +80,9 @@ labels = {
     3: "D",
     4: "E"
 }
-# "sklejenie" wierzchołków z poprzedniej produkcji w 1
-p2 = Production(L, K, R, labels)
+productions.append(Production(L, K, R, labels))
 
+# dołożenie wierzchołka E i krawędzi C -> E oraz D -> E
 L = ((1, 2), (), ())
 K = ((1, 2), (), ())
 R = ((1, 2, 3), (3,), (3,), ())
@@ -54,9 +91,30 @@ labels = {
     2: "D",
     3: "E"
 }
+productions.append(Production(L, K, R, labels))
 
-# dołożenie wierzchołka E i krawędzi C -> E oraz D -> E
-p3 = Production(L, K, R, labels)
+L = ((1, 2, 3), (2, 3), (), ())
+K = ((1, 2, 3), (2, 3), (), ())
+R = ((1, 2, 3, 4), (2, 3, 4), (4,), (4,), ())
+labels = {
+    1: "A",
+    2: "B",
+    3: "C",
+    4: "D"
+}
+productions.append(Production(L, K, R, labels))
+
+L = ((1, 2, 3, 4), (2, 3, 4), (4,), (4,), ())
+K = ((1,), ())
+R = ((1, 2, 3, 4), (), (1, 3), (), (1, 3))
+labels = {
+    1: "A",
+    2: "B",
+    3: "C",
+    4: "D"
+}
+productions.append(Production(L, K, R, labels))
+
 
 L = ((1, 2, 3), (2, 3), (), (2,))
 K = ((1, 2), (), ())
@@ -69,6 +127,4 @@ labels = {
     5: "E"
 }
 
-px = Production(L, K, R, labels)
-
-productions = [p0, p1, p2, p3, px]
+productions.append(Production(L, K, R, labels))
