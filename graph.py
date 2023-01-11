@@ -123,4 +123,56 @@ labels = {
 
 g1 = Graph(M, labels)
 
-graphs = [g0, g1]
+g2 = Graph([[False, True, True, True],
+            [False, False, False, True],
+            [False, False, False, True],
+            [False, False, False, False]],           
+           {0: "A", 1: "B", 2: "C", 3: "D"})
+
+g3 = Graph([[False, True, False, False, False],
+            [False, False, False, False, True],
+            [True, True, False, False, True],
+            [True, False, True, False, True],
+            [False, False, False, False, False]],
+           {0: "A", 1: "B", 2: "C", 3: "D", 4: "E"})
+
+g4 = Graph([[False, True, True],
+            [False, False, False],
+            [False, False, False]],
+           {0: "A", 1: "B", 2: "C"})
+
+g5 = Graph([[False, False, False],
+            [True, False, True],
+            [False, False, False]],
+           {0: "A", 1: "B", 2: "C"})
+
+g6 = Graph([[False, True, False, False, False],
+            [False, False, False, False, False],
+            [False, True, False, False, False],
+            [False, True, False, False, False],
+            [False, True, False, False, False]],
+           {0: "A", 1: "B", 2: "C", 3: "D", 4: "E"})
+
+g7 = Graph([[False, True, False],
+            [False, False, True],
+            [False, False, False]],
+           {0: "A", 1: "B", 2: "C"})
+
+g8 = Graph([[False, True, True, True],
+            [False, False, True, True],
+            [False, False, False, True],
+            [False, False, False, False]],           
+           {0: "A", 1: "B", 2: "C", 3: "D"})
+
+g9 = Graph([[False, True, True, True],
+            [False, False, True, True],
+            [False, False, False, False],
+            [False, False, False, False]],           
+           {0: "A", 1: "B", 2: "C", 3: "D"})
+
+g10 = Graph([[False, True, True],
+            [False, False, True],
+            [False, False, False]],
+           {0: "A", 1: "B", 2: "C"})
+
+graphs = [g0, g1, g2, g3, g4, g5, g6, g7, g8, g9, g10]
