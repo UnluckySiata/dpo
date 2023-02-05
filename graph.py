@@ -37,15 +37,21 @@ class Graph:
     def transform(self, p: Production, target_vertices: list[int]):
 
         # czy podgraf na tych wierzchołkach jest izomorficzny do L?
-        #mapping = dict()
-        if len(target_vertices) != len(p.L[0]):
+        n_vertices = len(target_vertices)
+        if n_vertices != len(p.L[0]):
             print("Produkcja nie została wykonania przez błąd przypasowania lewej strony produkcji do grafu")
             return
 
         proceed = True
 
-        for i in range(len(target_vertices)):
+        for i in range(n_vertices):
+            # poprawność etykiet
             if self.labels[target_vertices[i]] != p.labels[p.L[0][i]]:
+                proceed = False
+                break
+
+            # wszystkie krawędzie z izomorfizmu L w G muszą istnieć w G
+            if not all(self.M[target_vertices[i]][target_vertices[v - 1]] for v in p.L[i + 1]):
                 proceed = False
                 break
 
@@ -53,19 +59,7 @@ class Graph:
             print("Produkcja nie została wykonania przez błąd przypasowania lewej strony produkcji do grafu")
             return
 
-        mapping = {p.L[0][i]: target_vertices[i] for i in range(len(target_vertices))}
-        """
-        for v in target_vertices:
-            for i, w in enumerate(p.L[0]):
-                if w == 3 and v == 2:
-                    print(i + 1)
-                    print(p.L[i + 1])
-                    print([self.M[v][x] for x in p.L[i + 1]])
-                    print(self.labels[v] == p.labels[w])
-                if all(self.M[v][x] for x in p.L[i + 1]) and self.labels[v] == p.labels[w]:
-                    mapping[w] = v
-        """
-
+        mapping = {p.L[0][i]: target_vertices[i] for i in range(n_vertices)}
 
         # czy produkcja może zostać wykonana?
         for v in p.to_delete:

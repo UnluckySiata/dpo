@@ -42,7 +42,7 @@ def choose_vertices(G: graph.Graph):
         return (True, vertices)
     except Exception: return (False, None)
 
-def print_state(graph_index, production_index, vertices):
+def print_state(graph_index, vertices):
     result = f"""
 STAN SYMULACJI
 Graf początkowy: {"brak" if graph_index == -1 else f"g{graph_index}"}
@@ -123,7 +123,7 @@ if __name__ == "__main__":
     show_help()
     while run:
         get_action = True
-        print_state(graph_index, production_index, vertices)
+        print_state(graph_index, vertices)
         while get_action:
             get_action = False
             match input("Wybierz jedną z akcji: "):
